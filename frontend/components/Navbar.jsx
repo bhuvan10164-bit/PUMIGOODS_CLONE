@@ -253,7 +253,7 @@ function SearchModal({ open, onClose }) {
     if (open) {
       setTimeout(() => inputRef.current?.focus(), 80);
       if (allProducts.length === 0) {
-        fetch("http://127.0.0.1:8000/api/products/")
+        fetch("https://axalin-project.onrender.com/api/products/")
           .then(res => res.json())
           .then(data => setAllProducts(data))
           .catch(err => console.error("Search fetch error:", err));

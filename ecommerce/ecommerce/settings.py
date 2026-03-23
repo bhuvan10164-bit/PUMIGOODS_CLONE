@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(ecs=4od$5i5+h23_rk%^%=x0o9=c_y&+#tucil&50_^e!zz4b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['pumigoods-clone.onrender.com', 'axalin-project.onrender.com', 'localhost', '127.0.0.1', 'axalin-project.vercel.app']
+ALLOWED_HOSTS = ['pumigoods-clone.onrender.com', 'axalin-project.onrender.com', 'localhost', '127.0.0.1', 'axalin-project.vercel.app', 'pumigoods-clone.vercel.app']
 
 
 # Application definition
@@ -127,5 +127,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "https://axalin-project.vercel.app"
+    "https://axalin-project.vercel.app",
+    "https://pumigoods-clone.vercel.app"
 ]
