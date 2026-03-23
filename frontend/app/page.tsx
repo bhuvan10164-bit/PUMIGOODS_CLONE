@@ -33,7 +33,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col relative">
      
       <Hero />
-      <ProductCards products={products} /> 
+      <ProductCards products={products as any} /> 
       <MagazineCarousel/>
       <TestimonialInstagram/>
       <SubscribeSection/>
