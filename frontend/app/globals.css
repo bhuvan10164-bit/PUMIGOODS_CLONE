@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Base */
+  --color-bg:       #F7F5F0;   /* warm off-white, not clinical white */
+  --color-surface:  #FFFFFF;
+  --color-border:   #E8E4DC;
+
+  /* Text */
+  --color-text-primary:   #1A1714;
+  --color-text-secondary: #6B6560;
+  --color-text-muted:     #A09890;
+
+  /* Accent — Terra-cotta Red */
+  --color-accent:         #C8402A;
+  --color-accent-hover:   #A83220;
+
+  /* Functional */
+  --color-success: #2D6A4F;
+  --color-badge:   var(--color-accent);
+
+  /* Typography variables injected via layout.tsx */
+  --font-display: 'Playfair Display', serif;
+  --font-body:    'DM Sans', sans-serif;
+
+  /* Shadcn variables - map our theme tokens into their system where appropriate,
+     or use default where needed, but mostly we'll use our custom classes */
+  --background: oklch(0.97 0 0); /* Fallbacks, we'll try to use our vars */
+  --foreground: oklch(0.14 0 0);
+  --card: var(--color-surface);
+  --card-foreground: var(--color-text-primary);
+  --popover: var(--color-surface);
+  --popover-foreground: var(--color-text-primary);
+  --primary: var(--color-accent);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.96 0 0);
+  --secondary-foreground: var(--color-text-primary);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: var(--color-text-muted);
+  --accent: oklch(0.96 0 0);
+  --accent-foreground: var(--color-text-primary);
+  --destructive: oklch(0.57 0.2 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: var(--color-border);
+  --input: var(--color-border);
+  --ring: var(--color-accent);
+  --radius: 0.75rem; /* 12px for cards */
+}
+
+@theme inline {
+  --font-sans: var(--font-body);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  /* The grain pseudo-element will be applied via layout/component */
+}
+
+/* Typography Scale Configuration */
+h1, h2, h3, h4, h5, h6, .display-font {
+  font-family: var(--font-display);
+}
+
+.tnum {
+  font-feature-settings: 'tnum';
+  font-variant-numeric: tabular-nums;
+}
+
+/* Animations from SKILL.md */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  animation: fadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.reveal-1 { animation-delay: 0.00s; }
+.reveal-2 { animation-delay: 0.08s; }
+.reveal-3 { animation-delay: 0.16s; }
+.reveal-4 { animation-delay: 0.24s; }
+.reveal-5 { animation-delay: 0.32s; }
+
+/* Marquee setup */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 20s linear infinite;
+}
+
+/* Banner specific background */
+.banner-bg {
+  background:
+    repeating-linear-gradient(
+      -55deg,
+      transparent,
+      transparent 40px,
+      rgba(0,0,0,0.015) 40px,
+      rgba(0,0,0,0.015) 41px
+    ),
+    linear-gradient(135deg, #1A1714 0%, #2E2925 100%);
+}
+
+/* Grain overlay applied to body */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.035;
+}
+
+/* General interactive transition */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.2s;
+}
+
+/* Utility to ensure grain doesn't block clicks */
+.grain-overlay {
+  pointer-events: none;
+}
