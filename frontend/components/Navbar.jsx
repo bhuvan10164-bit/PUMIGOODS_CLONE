@@ -589,10 +589,8 @@ export default function Navbar() {
 
             {/* Logo — centered on mobile, positioned on desktop */}
             <Link href="/" className="flex flex-col items-center leading-none absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
-              <span className="text-3xl sm:text-4xl font-black tracking-tight text-gray-900" style={{ fontFamily: "Georgia, serif", letterSpacing: "-1px" }}>
-                PUM<span className="relative">I<span className="absolute -top-1 -right-1 text-[8px] font-bold">™</span></span>
-              </span>
-              <span className="text-[9px] tracking-[0.35em] font-semibold text-gray-500 uppercase mt-0.5">GOODS</span>
+              <img src={"https://pumigoods.com/wp-content/uploads/2025/10/Copy-of-Untitled-Brand-Template-2-e1759586360635-175x73.png"} alt="PumiGoods" 
+                style={{ width: "140px", height: "auto", marginBottom: "14px", display: "block" }} />
             </Link>
 
             {/* Mobile: Cart icon only */}

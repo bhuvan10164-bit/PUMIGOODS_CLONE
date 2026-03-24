@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 
 const LOGO = "https://pumigoods.com/wp-content/uploads/2025/10/Copy-of-Untitled-Brand-Template-2-e1759586360635-175x73.png";
@@ -22,16 +23,30 @@ const recentPosts = [
   },
 ];
 
-const quickLinks = ["Home", "About us", "Shop", "Contact us", "Blog", "Wholesale"];
-const policies = ["Privacy Policy", "Shipping Policy", "Terms & Conditions", "Refund and Returns Policy"];
+// ✅ Fixed: array of [label, path] tuples so both .map() calls work correctly
+const quickLinks = [
+  ["Home",      "/"],
+  ["About us",  "/about"],
+  ["Shop",      "/shop"],
+  ["Contact us","/contact"],
+  ["Blog",      "/blog"],
+  ["Wholesale", "/wholesale"],
+];
+
+const policies = [
+  "Privacy Policy",
+  "Shipping Policy",
+  "Terms & Conditions",
+  "Refund and Returns Policy",
+];
 
 const paymentMethods = [
-  { label: "VISA",         bg: "#1a1f71", color: "#fff", italic: true },
-  { label: "MC",           bg: "#eb001b", color: "#fff" },
-  { label: "PP",           bg: "#003087", color: "#fff" },
-  { label: "AMEX",         bg: "#007bc1", color: "#fff" },
+  { label: "VISA",           bg: "#1a1f71", color: "#fff", italic: true },
+  { label: "MC",             bg: "#eb001b", color: "#fff" },
+  { label: "PP",             bg: "#003087", color: "#fff" },
+  { label: "AMEX",           bg: "#007bc1", color: "#fff" },
   { label: "VISA\nElectron", bg: "#1a1f71", color: "#fff", small: true },
-  { label: "MC\nMaestro",  bg: "#333",    color: "#fff", small: true },
+  { label: "MC\nMaestro",    bg: "#333",    color: "#fff", small: true },
 ];
 
 function PaymentBadge({ label, bg, color, italic, small }) {
@@ -180,19 +195,27 @@ export default function Footer() {
             </a>
           </AccordionSection>
 
+          {/* ✅ Fixed: destructure [label, path] from the array of tuples */}
           <AccordionSection title="Quick Links">
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-              {quickLinks.map((link) => (
-                <a key={link} href="#" style={{
-                  fontSize: "14px", color: link === "Home" ? "#1a1a1a" : "#777",
-                  fontWeight: link === "Home" ? "700" : "400",
-                  textDecoration: "none", fontFamily: "'Open Sans', Arial, sans-serif",
-                }}
+              {quickLinks.map(([label, path]) => (
+                <Link
+                  key={label}
+                  href={path}
+                  style={{
+                    fontSize: "14px",
+                    color: label === "Home" ? "#1a1a1a" : "#777",
+                    fontWeight: label === "Home" ? "700" : "400",
+                    textDecoration: "none",
+                    fontFamily: "'Open Sans', Arial, sans-serif",
+                  }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "#3a9e5f")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = link === "Home" ? "#1a1a1a" : "#777")}
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = label === "Home" ? "#1a1a1a" : "#777")
+                  }
                 >
-                  {link}
-                </a>
+                  {label}
+                </Link>
               ))}
             </div>
           </AccordionSection>
@@ -268,23 +291,30 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* Col 4: Quick Links */}
+          {/* Col 4: Quick Links — ✅ Fixed: destructure [label, path] */}
           <div>
             <h4 style={{ fontSize: "15px", fontWeight: "700", color: "#1a1a1a", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "22px", fontFamily: "'Open Sans', Arial, sans-serif" }}>
               Quick Links
             </h4>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-              {quickLinks.map((link) => (
-                <a key={link} href="#" style={{
-                  fontSize: "14px", color: link === "Home" ? "#1a1a1a" : "#777",
-                  fontWeight: link === "Home" ? "700" : "400",
-                  textDecoration: "none", fontFamily: "'Open Sans', Arial, sans-serif",
-                }}
+              {quickLinks.map(([label, path]) => (
+                <Link
+                  key={label}
+                  href={path}
+                  style={{
+                    fontSize: "14px",
+                    color: label === "Home" ? "#1a1a1a" : "#777",
+                    fontWeight: label === "Home" ? "700" : "400",
+                    textDecoration: "none",
+                    fontFamily: "'Open Sans', Arial, sans-serif",
+                  }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "#3a9e5f")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "#777")}
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = label === "Home" ? "#1a1a1a" : "#777")
+                  }
                 >
-                  {link}
-                </a>
+                  {label}
+                </Link>
               ))}
             </div>
           </div>
