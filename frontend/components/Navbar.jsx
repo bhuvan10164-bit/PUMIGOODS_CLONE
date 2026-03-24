@@ -3,12 +3,12 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
-import { 
-  selectCartItems, 
-  selectCartCount, 
-  removeFromCart, 
-  increaseQty, 
-  decreaseQty 
+import {
+  selectCartItems,
+  selectCartCount,
+  removeFromCart,
+  increaseQty,
+  decreaseQty,
 } from "@/redux/cartSlice";
 import { selectWishlistItems } from "@/redux/wishlistSlice";
 
@@ -79,7 +79,6 @@ function CartDrawer({ open, onClose, items, onRemove, onQty }) {
         <div className="flex-1 overflow-y-auto px-5 py-6">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full gap-5 text-center pb-16">
-              {/* Cart with X icon */}
               <svg viewBox="0 0 90 80" fill="none" className="w-24 h-20">
                 <circle cx="30" cy="72" r="6" fill="#d1d5db"/>
                 <circle cx="64" cy="72" r="6" fill="#d1d5db"/>
@@ -88,12 +87,7 @@ function CartDrawer({ open, onClose, items, onRemove, onQty }) {
                 <line x1="70" y1="20" x2="55" y2="35" stroke="#d1d5db" strokeWidth="4.5" strokeLinecap="round"/>
               </svg>
               <p className="text-sm text-gray-500">No products in the cart.</p>
-              <Link
-                href="/shop"
-                onClick={onClose}
-                className="px-6 py-2.5 text-xs font-bold tracking-widest uppercase text-white rounded transition-opacity hover:opacity-90"
-                style={{ background: "#2e8b4a" }}
-              >
+              <Link href="/shop" onClick={onClose} className="px-6 py-2.5 text-xs font-bold tracking-widest uppercase text-white rounded transition-opacity hover:opacity-90" style={{ background: "#2e8b4a" }}>
                 Return to Shop
               </Link>
             </div>
@@ -165,7 +159,6 @@ function LoginDrawer({ open, onClose }) {
           transition: "transform 0.38s cubic-bezier(0.4,0,0.2,1)",
         }}
       >
-        {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
           <h2 className="text-base font-semibold text-gray-800" style={{ fontFamily: "Georgia, serif" }}>Sign in</h2>
           <CloseBtn onClick={onClose} />
@@ -173,25 +166,16 @@ function LoginDrawer({ open, onClose }) {
 
         <div className="flex-1 overflow-y-auto px-5 py-6 flex flex-col gap-5">
           <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
-            {/* Username */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-gray-600">
-                Username or email address <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text" name="username" value={form.username} onChange={onChange} required
-                className="w-full border border-gray-300 rounded px-3 py-2.5 text-sm text-gray-800 outline-none focus:border-[#2e8b4a] focus:ring-1 focus:ring-[#2e8b4a] transition-colors"
-              />
+              <label className="text-xs text-gray-600">Username or email address <span className="text-red-500">*</span></label>
+              <input type="text" name="username" value={form.username} onChange={onChange} required
+                className="w-full border border-gray-300 rounded px-3 py-2.5 text-sm text-gray-800 outline-none focus:border-[#2e8b4a] focus:ring-1 focus:ring-[#2e8b4a] transition-colors"/>
             </div>
-
-            {/* Password */}
             <div className="flex flex-col gap-1.5">
               <label className="text-xs text-gray-600">Password <span className="text-red-500">*</span></label>
               <div className="relative">
-                <input
-                  type={showPwd ? "text" : "password"} name="password" value={form.password} onChange={onChange} required
-                  className="w-full border border-gray-300 rounded px-3 py-2.5 pr-10 text-sm text-gray-800 outline-none focus:border-[#2e8b4a] focus:ring-1 focus:ring-[#2e8b4a] transition-colors"
-                />
+                <input type={showPwd ? "text" : "password"} name="password" value={form.password} onChange={onChange} required
+                  className="w-full border border-gray-300 rounded px-3 py-2.5 pr-10 text-sm text-gray-800 outline-none focus:border-[#2e8b4a] focus:ring-1 focus:ring-[#2e8b4a] transition-colors"/>
                 <button type="button" onClick={() => setShowPwd((s) => !s)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors">
                   {showPwd
                     ? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
@@ -200,38 +184,27 @@ function LoginDrawer({ open, onClose }) {
                 </button>
               </div>
             </div>
-
-            {/* Log In */}
             <button type="submit" className="w-full py-3 text-xs font-bold tracking-widest uppercase text-white rounded hover:opacity-90 transition-opacity" style={{ background: "#2e8b4a" }}>
               Log In
             </button>
-
-            {/* Remember / Lost Password */}
             <div className="flex items-center justify-between">
               <label className="flex items-center gap-2 text-xs text-gray-600 cursor-pointer select-none">
                 <input type="checkbox" name="remember" checked={form.remember} onChange={onChange} className="w-3.5 h-3.5 accent-[#2e8b4a]"/>
                 Remember me
               </label>
-              <Link href="/forgot-password" onClick={onClose} className="text-xs text-[#2e8b4a] hover:underline">
-                Lost your password?
-              </Link>
+              <Link href="/forgot-password" onClick={onClose} className="text-xs text-[#2e8b4a] hover:underline">Lost your password?</Link>
             </div>
           </form>
 
           <div className="border-t border-gray-100" />
 
-          {/* No account yet */}
           <div className="flex flex-col items-center gap-3 text-center pt-2">
             <svg viewBox="0 0 60 65" fill="none" className="w-14 h-14">
               <circle cx="30" cy="20" r="13" stroke="#d1d5db" strokeWidth="3" fill="none"/>
               <path d="M5 62C5 46 55 46 55 62" stroke="#d1d5db" strokeWidth="3" fill="none" strokeLinecap="round"/>
             </svg>
             <p className="text-sm text-gray-700 font-medium">No account yet?</p>
-            <Link
-              href="/register"
-              onClick={onClose}
-              className="text-xs font-bold tracking-widest uppercase text-gray-800 border-b-2 border-gray-800 pb-0.5 hover:text-[#2e8b4a] hover:border-[#2e8b4a] transition-colors"
-            >
+            <Link href="/register" onClick={onClose} className="text-xs font-bold tracking-widest uppercase text-gray-800 border-b-2 border-gray-800 pb-0.5 hover:text-[#2e8b4a] hover:border-[#2e8b4a] transition-colors">
               Create an Account
             </Link>
           </div>
@@ -247,21 +220,29 @@ function LoginDrawer({ open, onClose }) {
 function SearchModal({ open, onClose }) {
   const [query, setQuery] = useState("");
   const [allProducts, setAllProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [fetched, setFetched] = useState(false);
   const inputRef = useRef(null);
 
   useEffect(() => {
     if (open) {
       setTimeout(() => inputRef.current?.focus(), 80);
-      if (allProducts.length === 0) {
-        fetch("https://axalin-project.onrender.com/api/products/")
+      // Fetch only once per session
+      if (!fetched) {
+        setLoading(true);
+        fetch("https://pumigoods-clone.onrender.com/api/products/")
           .then(res => res.json())
-          .then(data => setAllProducts(data))
-          .catch(err => console.error("Search fetch error:", err));
+          .then(data => {
+            setAllProducts(Array.isArray(data) ? data : data.results ?? []);
+            setFetched(true);
+          })
+          .catch(err => console.error("Search fetch error:", err))
+          .finally(() => setLoading(false));
       }
     } else {
       setQuery("");
     }
-  }, [open, allProducts.length]);
+  }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const fn = (e) => { if (e.key === "Escape") onClose(); };
@@ -269,8 +250,8 @@ function SearchModal({ open, onClose }) {
     return () => window.removeEventListener("keydown", fn);
   }, [onClose]);
 
-  const filteredResults = query.trim() === "" 
-    ? [] 
+  const filteredResults = query.trim() === ""
+    ? []
     : allProducts.filter(p => p.name.toLowerCase().includes(query.toLowerCase())).slice(0, 8);
 
   return (
@@ -282,35 +263,35 @@ function SearchModal({ open, onClose }) {
         pointerEvents: open ? "auto" : "none",
       }}
     >
-      <div className="max-w-7xl mx-auto px-8 pt-24 pb-10 relative">
-        {/* Close Button */}
-        <button 
-          onClick={onClose} 
-          className="absolute top-10 right-10 text-gray-400 hover:text-gray-900 transition-colors p-2"
-          aria-label="Close search"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="w-12 h-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-16 sm:pt-24 pb-10 relative">
+        <button onClick={onClose} className="absolute top-6 sm:top-10 right-4 sm:right-10 text-gray-400 hover:text-gray-900 transition-colors p-2" aria-label="Close search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="w-8 h-8 sm:w-12 sm:h-12">
             <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
           </svg>
         </button>
 
-        {/* Input Area */}
-        <div className="relative border-b border-gray-100 pb-6 mb-12">
+        <div className="relative border-b border-gray-100 pb-6 mb-8 sm:mb-12">
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full text-6xl font-light text-gray-800 bg-transparent outline-none placeholder:text-gray-200"
-            style={{ fontFamily: 'Georgia, serif' }}
+            className="w-full text-3xl sm:text-6xl font-light text-gray-800 bg-transparent outline-none placeholder:text-gray-200"
+            style={{ fontFamily: "Georgia, serif" }}
             placeholder="Search for products"
           />
         </div>
 
-        {/* Hint or Results */}
-        <div className="min-h-[400px]">
-          {query.trim() === "" ? (
-            <p className="text-xl font-light text-gray-400" style={{ fontFamily: 'Georgia, serif' }}>
+        <div className="min-h-[200px] sm:min-h-[400px]">
+          {loading ? (
+            <div className="flex items-center gap-3 text-gray-400">
+              <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="40" strokeDashoffset="10"/>
+              </svg>
+              <span className="text-lg font-light" style={{ fontFamily: "Georgia, serif" }}>Loading products…</span>
+            </div>
+          ) : query.trim() === "" ? (
+            <p className="text-lg sm:text-xl font-light text-gray-400" style={{ fontFamily: "Georgia, serif" }}>
               Start typing to see products you are looking for.
             </p>
           ) : filteredResults.length > 0 ? (
@@ -320,18 +301,10 @@ function SearchModal({ open, onClose }) {
                 {filteredResults.map(product => {
                   const img = product.images?.before_image || product.beforeImg || product.image;
                   return (
-                    <Link 
-                      key={product.id} 
-                      href={`/${product.slug}`} 
-                      onClick={onClose}
-                      className="group flex items-center gap-5 p-3 border border-transparent hover:border-gray-100 hover:bg-gray-50 rounded-xl transition-all duration-300"
-                    >
-                      <div className="w-24 h-24 bg-gray-50 rounded-lg overflow-hidden flex-shrink-0">
-                        <img 
-                          src={img} 
-                          alt={product.name} 
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                        />
+                    <Link key={product.id} href={`/${product.slug}`} onClick={onClose}
+                      className="group flex items-center gap-5 p-3 border border-transparent hover:border-gray-100 hover:bg-gray-50 rounded-xl transition-all duration-300">
+                      <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gray-50 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src={img} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
                       </div>
                       <div className="flex flex-col min-w-0">
                         <span className="text-[10px] font-bold tracking-widest uppercase text-[#2e8b4a] mb-1">{product.category}</span>
@@ -344,12 +317,175 @@ function SearchModal({ open, onClose }) {
               </div>
             </div>
           ) : (
-            <p className="text-xl font-light text-gray-400" style={{ fontFamily: 'Georgia, serif' }}>
+            <p className="text-lg sm:text-xl font-light text-gray-400" style={{ fontFamily: "Georgia, serif" }}>
               No products found for "<span className="text-gray-800 font-normal">{query}</span>"
             </p>
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════
+   MOBILE MENU DRAWER
+════════════════════════════════════ */
+function MobileMenuDrawer({ open, onClose, pathname, wishlistCount, onLoginOpen, onSearchOpen }) {
+  const [activeTab, setActiveTab] = useState("menu");
+
+  return (
+    <>
+      <Backdrop show={open} onClick={onClose} />
+      <div
+        className="fixed top-0 left-0 h-full bg-white z-50 flex flex-col"
+        style={{
+          width: "min(85vw, 340px)",
+          boxShadow: "4px 0 24px rgba(0,0,0,0.12)",
+          transform: open ? "translateX(0)" : "translateX(-100%)",
+          transition: "transform 0.38s cubic-bezier(0.4,0,0.2,1)",
+        }}
+      >
+        {/* Search bar at top — tapping opens SearchModal */}
+        <button
+          onClick={() => { onClose(); onSearchOpen(); }}
+          className="flex items-center gap-3 px-4 py-3 border-b border-gray-100 w-full text-left"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-gray-400 flex-shrink-0">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <span className="flex-1 text-sm text-gray-400">Search for products</span>
+        </button>
+
+        {/* Tabs: MENU / CATEGORIES */}
+        <div className="flex border-b border-gray-100">
+          <button
+            onClick={() => setActiveTab("menu")}
+            className={`flex-1 py-3 text-xs font-bold tracking-widest uppercase transition-colors ${
+              activeTab === "menu"
+                ? "text-[#2e8b4a] border-b-2 border-[#2e8b4a]"
+                : "text-gray-400 hover:text-gray-600"
+            }`}
+          >
+            Menu
+          </button>
+          <button
+            onClick={() => setActiveTab("categories")}
+            className={`flex-1 py-3 text-xs font-bold tracking-widest uppercase transition-colors ${
+              activeTab === "categories"
+                ? "text-[#2e8b4a] border-b-2 border-[#2e8b4a]"
+                : "text-gray-400 hover:text-gray-600"
+            }`}
+          >
+            Categories
+          </button>
+        </div>
+
+        {/* Menu Items */}
+        <div className="flex-1 overflow-y-auto">
+          {activeTab === "menu" ? (
+            <nav className="flex flex-col">
+              {NAV_LINKS.map((link) => {
+                const href = HREF_MAP[link] ?? "/";
+                const isActive = pathname === href || (href !== "/" && pathname.startsWith(href + "/"));
+                return (
+                  <Link
+                    key={link}
+                    href={href}
+                    onClick={onClose}
+                    className={`flex items-center px-5 py-4 text-sm font-bold tracking-widest uppercase border-b border-gray-50 transition-colors ${
+                      isActive ? "text-[#2e8b4a]" : "text-gray-700 hover:text-[#2e8b4a]"
+                    }`}
+                  >
+                    {link}
+                  </Link>
+                );
+              })}
+
+              {/* Extra links */}
+              <Link href="/wishlist" onClick={onClose} className="flex items-center gap-3 px-5 py-4 text-sm font-bold tracking-widest uppercase border-b border-gray-50 text-gray-700 hover:text-[#2e8b4a] transition-colors">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+                Wishlist
+                {wishlistCount > 0 && (
+                  <span className="ml-auto bg-[#2e8b4a] text-white text-[10px] rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                    {wishlistCount}
+                  </span>
+                )}
+              </Link>
+
+              <Link href="/compare" onClick={onClose} className="flex items-center gap-3 px-5 py-4 text-sm font-bold tracking-widest uppercase border-b border-gray-50 text-gray-700 hover:text-[#2e8b4a] transition-colors">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+                  <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+                </svg>
+                Compare
+              </Link>
+
+              <button
+                onClick={() => { onClose(); onLoginOpen(); }}
+                className="flex items-center gap-3 px-5 py-4 text-sm font-bold tracking-widest uppercase border-b border-gray-50 text-gray-700 hover:text-[#2e8b4a] transition-colors w-full text-left"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                </svg>
+                Login / Register
+              </button>
+            </nav>
+          ) : (
+            /* Categories tab placeholder */
+            <div className="flex flex-col items-center justify-center h-40 text-gray-400">
+              <p className="text-sm">No categories yet</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
+}
+
+/* ═══════════════════════════════════
+   MOBILE BOTTOM NAV BAR
+════════════════════════════════════ */
+function MobileBottomNav({ onCartOpen, wishlistCount, cartCount }) {
+  return (
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 z-30 flex items-center md:hidden"
+      style={{ boxShadow: "0 -2px 12px rgba(0,0,0,0.08)" }}>
+      <Link href="/shop" className="flex-1 flex flex-col items-center gap-1 py-3 text-gray-500 hover:text-[#2e8b4a] transition-colors">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span className="text-[10px] font-semibold tracking-wide">Shop</span>
+      </Link>
+
+      <Link href="/wishlist" className="flex-1 flex flex-col items-center gap-1 py-3 text-gray-500 hover:text-[#2e8b4a] transition-colors relative">
+        <div className="relative">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          {wishlistCount > 0 && (
+            <span className="absolute -top-2 -right-2 bg-[#2e8b4a] text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold">{wishlistCount}</span>
+          )}
+        </div>
+        <span className="text-[10px] font-semibold tracking-wide">Wishlist</span>
+      </Link>
+
+      <button onClick={onCartOpen} className="flex-1 flex flex-col items-center gap-1 py-3 text-gray-500 hover:text-[#2e8b4a] transition-colors relative">
+        <div className="relative">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          <span className="absolute -top-2 -right-2 bg-[#2e8b4a] text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold">{cartCount}</span>
+        </div>
+        <span className="text-[10px] font-semibold tracking-wide">Cart</span>
+      </button>
+
+      <Link href="/account" className="flex-1 flex flex-col items-center gap-1 py-3 text-gray-500 hover:text-[#2e8b4a] transition-colors">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+        </svg>
+        <span className="text-[10px] font-semibold tracking-wide">My account</span>
+      </Link>
     </div>
   );
 }
@@ -361,63 +497,80 @@ export default function Navbar() {
   const pathname = usePathname();
   const dispatch = useDispatch();
 
-  const [cartOpen,   setCartOpen]   = useState(false);
-  const [loginOpen,  setLoginOpen]  = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [cartOpen,       setCartOpen]       = useState(false);
+  const [loginOpen,      setLoginOpen]      = useState(false);
+  const [searchOpen,     setSearchOpen]     = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  /* Redux Cart state */
-  const cartItems = useSelector(selectCartItems);
-  const cartCount = useSelector(selectCartCount);
-
+  const cartItems     = useSelector(selectCartItems);
+  const cartCount     = useSelector(selectCartCount);
   const wishlistItems = useSelector(selectWishlistItems);
   const wishlistCount = wishlistItems.length;
 
   const removeItem = (id) => dispatch(removeFromCart(id));
-  const onIncrease = (id) => dispatch(increaseQty(id));
-  const onDecrease = (id) => dispatch(decreaseQty(id));
 
-  /* Open helpers — only one panel at a time */
-  const openCart   = () => { setCartOpen(true);   setLoginOpen(false);  setSearchOpen(false); };
-  const openLogin  = () => { setLoginOpen(true);  setCartOpen(false);   setSearchOpen(false); };
-  const openSearch = () => { setSearchOpen(true); setCartOpen(false);   setLoginOpen(false);  };
+  const openCart       = () => { setCartOpen(true);       setLoginOpen(false);  setSearchOpen(false); setMobileMenuOpen(false); };
+  const openLogin      = () => { setLoginOpen(true);      setCartOpen(false);   setSearchOpen(false); setMobileMenuOpen(false); };
+  const openSearch     = () => { setSearchOpen(true);     setCartOpen(false);   setLoginOpen(false);  setMobileMenuOpen(false); };
+  const openMobileMenu = () => { setMobileMenuOpen(true); setCartOpen(false);   setLoginOpen(false);  setSearchOpen(false); };
 
   return (
     <>
       <div className="font-sans bg-white">
 
         {/* ── Top green bar ── */}
-        <div className="bg-[#2e8b4a] text-white text-xs py-2 px-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <button className="flex items-center gap-1 hover:underline font-medium tracking-wide">
-              LANGUAGE <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3 h-3 ml-0.5 inline"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <button className="flex items-center gap-1 hover:underline font-medium tracking-wide">
-              COUNTRY <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3 h-3 ml-0.5 inline"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <span className="font-semibold tracking-wide">FREE SHIPPING FOR ALL ORDERS OF $150</span>
+        <div className="bg-[#2e8b4a] text-white text-xs py-2 px-4">
+          {/* Mobile top bar: only social icons centered */}
+          <div className="flex items-center justify-center gap-4 md:hidden">
+            {[<FB key="fb"/>, <XI key="x"/>, <IG key="ig"/>, <YT key="yt"/>, <LIN key="li"/>].map((ic) => (
+              <a key={ic.key} href="#" className="hover:text-green-200 transition-colors" aria-label={ic.key}>{ic}</a>
+            ))}
           </div>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-3">
-              {[<FB key="fb"/>, <XI key="x"/>, <IG key="ig"/>, <YT key="yt"/>, <LIN key="li"/>].map((ic) => (
-                <a key={ic.key} href="#" className="hover:text-green-200 transition-colors" aria-label={ic.key}>{ic}</a>
-              ))}
+
+          {/* Desktop top bar */}
+          <div className="hidden md:flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <button className="flex items-center gap-1 hover:underline font-medium tracking-wide">
+                LANGUAGE <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3 h-3 ml-0.5 inline"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <button className="flex items-center gap-1 hover:underline font-medium tracking-wide">
+                COUNTRY <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3 h-3 ml-0.5 inline"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <span className="font-semibold tracking-wide">FREE SHIPPING FOR ALL ORDERS OF $150</span>
             </div>
-            <div className="flex items-center gap-3 text-xs font-medium">
-              <a href="#" className="hover:underline tracking-wide">NEWSLETTER</a>
-              <span className="opacity-50">|</span>
-              <a href="#" className="hover:underline tracking-wide">CONTACT US</a>
-              <span className="opacity-50">|</span>
-              <a href="#" className="hover:underline tracking-wide">FAQS</a>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
+                {[<FB key="fb"/>, <XI key="x"/>, <IG key="ig"/>, <YT key="yt"/>, <LIN key="li"/>].map((ic) => (
+                  <a key={ic.key} href="#" className="hover:text-green-200 transition-colors" aria-label={ic.key}>{ic}</a>
+                ))}
+              </div>
+              <div className="flex items-center gap-3 text-xs font-medium">
+                <a href="#" className="hover:underline tracking-wide">NEWSLETTER</a>
+                <span className="opacity-50">|</span>
+                <a href="#" className="hover:underline tracking-wide">CONTACT US</a>
+                <span className="opacity-50">|</span>
+                <a href="#" className="hover:underline tracking-wide">FAQS</a>
+              </div>
             </div>
           </div>
         </div>
 
         {/* ── Header ── */}
-        <header className="border-b border-gray-100 py-3 px-6">
+        <header className="border-b border-gray-100 py-3 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
 
-            {/* Contact info */}
-            <div className="flex items-center gap-6 text-sm text-gray-600">
+            {/* Mobile: Hamburger */}
+            <div className="flex items-center md:hidden">
+              <button onClick={openMobileMenu} className="flex items-center gap-2 text-gray-700 hover:text-[#2e8b4a] transition-colors" aria-label="Open menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+                  <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+                <span className="text-xs font-bold tracking-widest uppercase">Menu</span>
+              </button>
+            </div>
+
+            {/* Desktop: Contact info */}
+            <div className="hidden md:flex items-center gap-6 text-sm text-gray-600">
               <div className="flex items-center gap-2">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 flex-shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.95-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                 <div>
@@ -434,47 +587,17 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Logo */}
-            <Link href="/" className="flex flex-col items-center leading-none">
-              <span className="text-4xl font-black tracking-tight text-gray-900" style={{ fontFamily: "Georgia, serif", letterSpacing: "-1px" }}>
+            {/* Logo — centered on mobile, positioned on desktop */}
+            <Link href="/" className="flex flex-col items-center leading-none absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
+              <span className="text-3xl sm:text-4xl font-black tracking-tight text-gray-900" style={{ fontFamily: "Georgia, serif", letterSpacing: "-1px" }}>
                 PUM<span className="relative">I<span className="absolute -top-1 -right-1 text-[8px] font-bold">™</span></span>
               </span>
               <span className="text-[9px] tracking-[0.35em] font-semibold text-gray-500 uppercase mt-0.5">GOODS</span>
             </Link>
 
-            {/* Action buttons */}
-            <div className="flex items-center gap-4 text-sm text-gray-700">
-              {/* LOGIN */}
-              <button
-                onClick={openLogin}
-                className="hover:text-[#2e8b4a] transition-colors font-medium"
-              >
-                LOGIN / REGISTER
-              </button>
-
-              {/* SEARCH */}
-              <button onClick={openSearch} className="hover:text-[#2e8b4a] transition-colors" aria-label="Search">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
-                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                </svg>
-              </button>
-
-              {/* WISHLIST */}
-              <Link href="/wishlist" className="hover:text-[#2e8b4a] transition-colors" aria-label="Wishlist">
-                <div className="relative">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                  </svg>
-                  {wishlistCount > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-[#2e8b4a] text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold">
-                      {wishlistCount}
-                    </span>
-                  )}
-                </div>
-              </Link>
-
-              {/* CART */}
-              <button onClick={openCart} className="flex items-center hover:text-[#2e8b4a] transition-colors" aria-label="Cart">
+            {/* Mobile: Cart icon only */}
+            <div className="flex items-center md:hidden">
+              <button onClick={openCart} className="flex items-center hover:text-[#2e8b4a] transition-colors text-gray-700" aria-label="Cart">
                 <div className="relative">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
                     <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
@@ -486,11 +609,42 @@ export default function Navbar() {
                 </div>
               </button>
             </div>
+
+            {/* Desktop: Action buttons */}
+            <div className="hidden md:flex items-center gap-4 text-sm text-gray-700">
+              <button onClick={openLogin} className="hover:text-[#2e8b4a] transition-colors font-medium">
+                LOGIN / REGISTER
+              </button>
+              <button onClick={openSearch} className="hover:text-[#2e8b4a] transition-colors" aria-label="Search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+              </button>
+              <Link href="/wishlist" className="hover:text-[#2e8b4a] transition-colors" aria-label="Wishlist">
+                <div className="relative">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                  </svg>
+                  {wishlistCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-[#2e8b4a] text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold">{wishlistCount}</span>
+                  )}
+                </div>
+              </Link>
+              <button onClick={openCart} className="flex items-center hover:text-[#2e8b4a] transition-colors" aria-label="Cart">
+                <div className="relative">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+                    <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                  </svg>
+                  <span className="absolute -top-2 -right-2 bg-[#2e8b4a] text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold">{cartCount}</span>
+                </div>
+              </button>
+            </div>
           </div>
         </header>
 
-        {/* ── Nav links ── */}
-        <nav className="border-b border-gray-100 py-3">
+        {/* ── Nav links (desktop only) ── */}
+        <nav className="hidden md:block border-b border-gray-100 py-3">
           <div className="max-w-7xl mx-auto flex items-center justify-center gap-10">
             {NAV_LINKS.map((link) => {
               const href = HREF_MAP[link] ?? "/";
@@ -511,14 +665,29 @@ export default function Navbar() {
         </nav>
       </div>
 
+      {/* ── Mobile bottom nav ── */}
+      <MobileBottomNav
+        onCartOpen={openCart}
+        wishlistCount={wishlistCount}
+        cartCount={cartCount}
+      />
+
       {/* ── Panels ── */}
+      <MobileMenuDrawer
+        open={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        pathname={pathname}
+        wishlistCount={wishlistCount}
+        onLoginOpen={openLogin}
+        onSearchOpen={openSearch}
+      />
       <CartDrawer
         open={cartOpen}
         onClose={() => setCartOpen(false)}
         items={cartItems.map(i => ({ ...i, qty: i.quantity }))}
         onRemove={removeItem}
         onQty={(id, qty, oldQty) => {
-          if (qty > oldQty) dispatch(increaseQty(id));
+          if (qty > (oldQty ?? qty - 1)) dispatch(increaseQty(id));
           else dispatch(decreaseQty(id));
         }}
       />

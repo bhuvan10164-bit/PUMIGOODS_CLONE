@@ -1,17 +1,11 @@
 "use client";
 import { useState, useRef } from "react";
 
-const IMAGE_URL =
-  "https://pumigoods.com/wp-content/uploads/2026/03/n...-exfoliation-egyptian-loofah-sponges-700x467.webp";
-
-const FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=700&h=467&fit=crop";
-
 const articles = [
   {
     id: 1,
     day: "18",
-    img:"https://pumigoods.com/wp-content/uploads/2026/03/natural-exfoliation-egyptian-loofah-sponges.webp",
+    img: "https://pumigoods.com/wp-content/uploads/2026/03/natural-exfoliation-egyptian-loofah-sponges.webp",
     month: "MAR",
     title: "The Dust Factory: Why You Should Stop Scrubbing Your Skin With Plastic Trash",
     excerpt:
@@ -20,7 +14,7 @@ const articles = [
   {
     id: 2,
     day: "17",
-    img:"https://pumigoods.com/wp-content/uploads/2026/03/handleless-bamboo-hair-brush-pumi-goods.webp",
+    img: "https://pumigoods.com/wp-content/uploads/2026/03/handleless-bamboo-hair-brush-pumi-goods.webp",
     month: "MAR",
     title: "Handleless Bamboo Hair Brush: Why Handles Are Absurd",
     excerpt:
@@ -29,7 +23,7 @@ const articles = [
   {
     id: 3,
     day: "16",
-    img:"https://pumigoods.com/wp-content/uploads/2026/03/wooden-scalp-massager-hero-travertine.webp",
+    img: "https://pumigoods.com/wp-content/uploads/2026/03/wooden-scalp-massager-hero-travertine.webp",
     month: "MAR",
     title: "Why my scalp feels like cement (and what actually scrubbed it off)",
     excerpt:
@@ -38,28 +32,25 @@ const articles = [
   {
     id: 4,
     day: "15",
-    img:"https://pumigoods.com/wp-content/uploads/2026/03/neem-wood-comb-thick-teeth-close-up-1.webp",
+    img: "https://pumigoods.com/wp-content/uploads/2026/03/neem-wood-comb-thick-teeth-close-up-1.webp",
     month: "MAR",
     title: "The mildly annoying, mostly great reality of switching to a wooden comb",
     excerpt:
-      "I dropped the damn thing on the bathroom tiles this morning and fully expected it to shatter into splinters. Because that’s what happened…",
+      "I dropped the damn thing on the bathroom tiles this morning and fully expected it to shatter into splinters. Because that's what happened…",
   },
 ];
 
-function ArticleCard({ article }) {
-  const [imgError, setImgError] = useState(false);
-  const [hovered, setHovered] = useState(false);
-
+function ArticleCard({ article, hovered, onMouseEnter, onMouseLeave }) {
   return (
     <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       style={{
         background: "#fff",
-        flex: "0 0 calc(33.333% - 14px)",
-        minWidth: 0,
         display: "flex",
         flexDirection: "column",
+        width: "100%",
+        height: "100%",
         boxShadow: hovered
           ? "0 4px 18px rgba(0,0,0,0.11)"
           : "0 1px 6px rgba(0,0,0,0.07)",
@@ -67,7 +58,7 @@ function ArticleCard({ article }) {
       }}
     >
       {/* Image */}
-      <div style={{ position: "relative", overflow: "hidden", height: "260px" }}>
+      <div style={{ position: "relative", overflow: "hidden", height: "260px", flexShrink: 0 }}>
         {/* Date badge */}
         <div
           style={{
@@ -82,27 +73,10 @@ function ArticleCard({ article }) {
             boxShadow: "0 1px 4px rgba(0,0,0,0.10)",
           }}
         >
-          <div
-            style={{
-              fontSize: "22px",
-              fontWeight: "700",
-              color: "#1a1a1a",
-              lineHeight: 1,
-              fontFamily: "Arial, sans-serif",
-            }}
-          >
+          <div style={{ fontSize: "22px", fontWeight: "700", color: "#1a1a1a", lineHeight: 1, fontFamily: "Arial, sans-serif" }}>
             {article.day}
           </div>
-          <div
-            style={{
-              fontSize: "11px",
-              fontWeight: "600",
-              color: "#777",
-              letterSpacing: "0.12em",
-              marginTop: "3px",
-              fontFamily: "Arial, sans-serif",
-            }}
-          >
+          <div style={{ fontSize: "11px", fontWeight: "600", color: "#777", letterSpacing: "0.12em", marginTop: "3px", fontFamily: "Arial, sans-serif" }}>
             {article.month}
           </div>
         </div>
@@ -110,7 +84,6 @@ function ArticleCard({ article }) {
         <img
           src={article.img}
           alt={article.title}
-          onError={() => setImgError(true)}
           style={{
             width: "100%",
             height: "100%",
@@ -123,51 +96,14 @@ function ArticleCard({ article }) {
       </div>
 
       {/* Content */}
-      <div
-        style={{
-          padding: "28px 28px 26px",
-          textAlign: "center",
-          display: "flex",
-          flexDirection: "column",
-          flex: 1,
-        }}
-      >
-        <h3
-          style={{
-            fontSize: "18.5px",
-            fontWeight: "700",
-            color: "#1a1a1a",
-            lineHeight: "1.38",
-            marginBottom: "14px",
-            fontFamily: "'Georgia', 'Times New Roman', serif",
-          }}
-        >
+      <div style={{ padding: "28px 28px 26px", textAlign: "center", display: "flex", flexDirection: "column", flex: 1 }}>
+        <h3 style={{ fontSize: "18.5px", fontWeight: "700", color: "#1a1a1a", lineHeight: "1.38", marginBottom: "14px", fontFamily: "'Georgia', 'Times New Roman', serif" }}>
           {article.title}
         </h3>
-        <p
-          style={{
-            fontSize: "13.5px",
-            color: "#888",
-            lineHeight: "1.7",
-            marginBottom: "18px",
-            flex: 1,
-            fontFamily: "Arial, sans-serif",
-          }}
-        >
+        <p style={{ fontSize: "13.5px", color: "#888", lineHeight: "1.7", marginBottom: "18px", flex: 1, fontFamily: "Arial, sans-serif" }}>
           {article.excerpt}
         </p>
-        <a
-          href="#"
-          style={{
-            fontSize: "11px",
-            fontWeight: "700",
-            letterSpacing: "0.18em",
-            color: "#3a9e5f",
-            textDecoration: "none",
-            textTransform: "uppercase",
-            fontFamily: "Arial, sans-serif",
-          }}
-        >
+        <a href="#" style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.18em", color: "#3a9e5f", textDecoration: "none", textTransform: "uppercase", fontFamily: "Arial, sans-serif" }}>
           CONTINUE READING…
         </a>
       </div>
@@ -177,33 +113,45 @@ function ArticleCard({ article }) {
 
 export default function MagazineCarousel() {
   const [page, setPage] = useState(0);
+  const [hoveredCard, setHoveredCard] = useState(null);
   const [arrowsVisible, setArrowsVisible] = useState(false);
   const hideTimerRef = useRef(null);
 
-  const HIDE_DELAY = 1500; // ms to keep arrows visible after cursor leaves
+  // Touch swipe state
+  const touchStartX = useRef(null);
 
+  const HIDE_DELAY = 1500;
+
+  // Desktop: 3 per page. Mobile handled via CSS single-card sliding strip.
   const itemsPerPage = 3;
-  const totalPages = Math.ceil(articles.length / itemsPerPage);
-  const visible = articles.slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage);
+  const totalDesktopPages = Math.ceil(articles.length / itemsPerPage);
+  const totalMobilePages = articles.length;
 
-  const prev = () => setPage((p) => Math.max(0, p - 1));
-  const next = () => setPage((p) => Math.min(totalPages - 1, p + 1));
+  const prevDesktop = () => setPage((p) => Math.max(0, p - 1));
+  const nextDesktop = () => setPage((p) => Math.min(totalDesktopPages - 1, p + 1));
+
+  const prevMobile = () => setPage((p) => Math.max(0, p - 1));
+  const nextMobile = () => setPage((p) => Math.min(totalMobilePages - 1, p + 1));
 
   const handleMouseEnter = () => {
-    // Cancel any pending hide
-    if (hideTimerRef.current) {
-      clearTimeout(hideTimerRef.current);
-      hideTimerRef.current = null;
-    }
+    if (hideTimerRef.current) { clearTimeout(hideTimerRef.current); hideTimerRef.current = null; }
     setArrowsVisible(true);
   };
-
   const handleMouseLeave = () => {
-    // Delay hiding arrows so user has time to move to them
-    hideTimerRef.current = setTimeout(() => {
-      setArrowsVisible(false);
-    }, HIDE_DELAY);
+    hideTimerRef.current = setTimeout(() => setArrowsVisible(false), HIDE_DELAY);
   };
+
+  // Touch handlers for mobile swipe
+  const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
+  const onTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (diff > 40) nextMobile();
+    else if (diff < -40) prevMobile();
+    touchStartX.current = null;
+  };
+
+  const visibleDesktop = articles.slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage);
 
   const ArrowBtn = ({ onClick, disabled, children, side }) => (
     <button
@@ -235,111 +183,159 @@ export default function MagazineCarousel() {
   );
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#f8f8f6",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "60px 24px",
-      }}
-    >
+    <div style={{ minHeight: "100vh", background: "#f8f8f6", display: "flex", alignItems: "center", justifyContent: "center", padding: "60px 24px" }}>
       <div style={{ width: "100%", maxWidth: "1180px" }}>
 
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: "42px" }}>
-          <p
-            style={{
-              fontSize: "11px",
-              fontWeight: "700",
-              letterSpacing: "0.22em",
-              textTransform: "uppercase",
-              color: "#3a9e5f",
-              marginBottom: "12px",
-              fontFamily: "Arial, sans-serif",
-            }}
-          >
+          <p style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.22em", textTransform: "uppercase", color: "#3a9e5f", marginBottom: "12px", fontFamily: "Arial, sans-serif" }}>
             Go Green Accessories
           </p>
-          <h1
-            style={{
-              fontSize: "34px",
-              fontWeight: "700",
-              letterSpacing: "0.13em",
-              textTransform: "uppercase",
-              color: "#1a1a1a",
-              marginBottom: "14px",
-              fontFamily: "'Georgia', 'Times New Roman', serif",
-            }}
-          >
+          <h1 style={{ fontSize: "34px", fontWeight: "700", letterSpacing: "0.13em", textTransform: "uppercase", color: "#1a1a1a", marginBottom: "14px", fontFamily: "'Georgia', 'Times New Roman', serif" }}>
             Hand Made Magazine
           </h1>
-          <p
-            style={{
-              fontSize: "14px",
-              color: "#aaa",
-              fontFamily: "Arial, sans-serif",
-            }}
-          >
+          <p style={{ fontSize: "14px", color: "#aaa", fontFamily: "Arial, sans-serif" }}>
             Visit our shop to see amazing creations from our designers.
           </p>
         </div>
 
-        {/* Carousel */}
+        {/* ── DESKTOP CAROUSEL (hidden on mobile) ── */}
         <div
+          className="hidden md:block"
           style={{ position: "relative" }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          {/* Left Arrow */}
-          <ArrowBtn onClick={prev} disabled={page === 0} side="left">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <ArrowBtn onClick={prevDesktop} disabled={page === 0} side="left">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="15 18 9 12 15 6" />
             </svg>
           </ArrowBtn>
 
-          {/* Cards row */}
           <div style={{ display: "flex", gap: "20px" }}>
-            {visible.map((article) => (
-              <ArticleCard key={article.id} article={article} />
+            {visibleDesktop.map((article) => (
+              <div key={article.id} style={{ flex: "0 0 calc(33.333% - 14px)", minWidth: 0 }}>
+                <ArticleCard
+                  article={article}
+                  hovered={hoveredCard === article.id}
+                  onMouseEnter={() => setHoveredCard(article.id)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                />
+              </div>
             ))}
           </div>
 
-          {/* Right Arrow */}
-          <ArrowBtn onClick={next} disabled={page === totalPages - 1} side="right">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <ArrowBtn onClick={nextDesktop} disabled={page === totalDesktopPages - 1} side="right">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="9 18 15 12 9 6" />
             </svg>
           </ArrowBtn>
         </div>
 
-        {/* Dots */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: "8px",
-            marginTop: "28px",
-          }}
-        >
-          {Array.from({ length: totalPages }).map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setPage(i)}
-              style={{
-                width: "10px",
-                height: "10px",
-                borderRadius: "50%",
-                border: "none",
-                cursor: "pointer",
-                padding: 0,
-                background: i === page ? "#1a1a1a" : "#ccc",
-                transition: "background 0.2s ease",
-              }}
+        {/* Desktop dots */}
+        <div className="hidden md:flex" style={{ justifyContent: "center", gap: "8px", marginTop: "28px" }}>
+          {Array.from({ length: totalDesktopPages }).map((_, i) => (
+            <button key={i} onClick={() => setPage(i)}
+              style={{ width: "10px", height: "10px", borderRadius: "50%", border: "none", cursor: "pointer", padding: 0, background: i === page ? "#1a1a1a" : "#ccc", transition: "background 0.2s ease" }}
               aria-label={`Page ${i + 1}`}
+            />
+          ))}
+        </div>
+
+        {/* ── MOBILE CAROUSEL (hidden on desktop) ── */}
+        <div
+          className="md:hidden"
+          style={{ position: "relative" }}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+        >
+          {/* Sliding strip */}
+          <div style={{ overflow: "hidden" }}>
+            <div
+              style={{
+                display: "flex",
+                transform: `translateX(calc(-${page * 100}%))`,
+                transition: "transform 0.38s cubic-bezier(0.4,0,0.2,1)",
+              }}
+            >
+              {articles.map((article) => (
+                <div key={article.id} style={{ flex: "0 0 100%", minWidth: 0 }}>
+                  <ArticleCard
+                    article={article}
+                    hovered={false}
+                    onMouseEnter={() => {}}
+                    onMouseLeave={() => {}}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile left arrow */}
+          {page > 0 && (
+            <button
+              onClick={prevMobile}
+              style={{
+                position: "absolute",
+                left: "10px",
+                top: "130px",
+                zIndex: 20,
+                background: "#fff",
+                border: "none",
+                borderRadius: "50%",
+                width: "38px",
+                height: "38px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+                cursor: "pointer",
+                color: "#555",
+              }}
+              aria-label="Previous"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+          )}
+
+          {/* Mobile right arrow */}
+          {page < totalMobilePages - 1 && (
+            <button
+              onClick={nextMobile}
+              style={{
+                position: "absolute",
+                right: "10px",
+                top: "130px",
+                zIndex: 20,
+                background: "#fff",
+                border: "none",
+                borderRadius: "50%",
+                width: "38px",
+                height: "38px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+                cursor: "pointer",
+                color: "#555",
+              }}
+              aria-label="Next"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          )}
+        </div>
+
+        {/* Mobile dots */}
+        <div className="md:hidden" style={{ display: "flex", justifyContent: "center", gap: "8px", marginTop: "20px" }}>
+          {articles.map((_, i) => (
+            <button key={i} onClick={() => setPage(i)}
+              style={{ width: "10px", height: "10px", borderRadius: "50%", border: "none", cursor: "pointer", padding: 0, background: i === page ? "#1a1a1a" : "#ccc", transition: "background 0.2s ease" }}
+              aria-label={`Article ${i + 1}`}
             />
           ))}
         </div>

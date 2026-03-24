@@ -56,14 +56,13 @@ function ArticleCard({ article }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         background: "#fff",
-        flex: "0 0 calc(33.333% - 14px)",
-        minWidth: 0,
         display: "flex",
         flexDirection: "column",
         boxShadow: hovered
           ? "0 4px 18px rgba(0,0,0,0.11)"
           : "0 1px 6px rgba(0,0,0,0.07)",
         transition: "box-shadow 0.3s ease",
+        width: "100%",
       }}
     >
       {/* Image */}
@@ -137,21 +136,65 @@ function ArticleCard({ article }) {
 export default function BlogPage() {
   return (
     <>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
-        rel="stylesheet"
-      />
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+        .blog-grid {
+          display: flex;
+          gap: 20px;
+          flex-wrap: wrap;
+        }
+
+        .blog-grid > * {
+          flex: 0 0 calc(33.333% - 14px);
+          min-width: 0;
+        }
+
+        @media (max-width: 900px) {
+          .blog-grid > * {
+            flex: 0 0 calc(50% - 10px);
+          }
+        }
+
+        @media (max-width: 600px) {
+          .blog-grid {
+            flex-direction: column;
+            gap: 16px;
+          }
+
+          .blog-grid > * {
+            flex: 0 0 100%;
+            width: 100%;
+          }
+
+          .blog-header h1 {
+            font-size: 28px !important;
+          }
+
+          .blog-header {
+            padding: 28px 16px 20px !important;
+            margin-bottom: 28px !important;
+          }
+
+          .blog-container {
+            padding: 0 16px 40px !important;
+          }
+        }
+      `}</style>
 
       <div style={{ background: "#f8f8f6", minHeight: "100vh", fontFamily: "Arial, sans-serif" }}>
 
         {/* Page header */}
-        <div style={{
-          background: "#f0f0ee",
-          textAlign: "center",
-          padding: "40px 24px 30px",
-          borderBottom: "1px solid #e8e8e8",
-          marginBottom: "50px",
-        }}>
+        <div
+          className="blog-header"
+          style={{
+            background: "#f0f0ee",
+            textAlign: "center",
+            padding: "40px 24px 30px",
+            borderBottom: "1px solid #e8e8e8",
+            marginBottom: "50px",
+          }}
+        >
           <h1 style={{
             fontSize: "42px", fontWeight: "700",
             color: "#1a1a1a", marginBottom: "12px",
@@ -174,9 +217,12 @@ export default function BlogPage() {
           </p>
         </div>
 
-        {/* Cards grid — exactly 6 cards, no pagination */}
-        <div style={{ maxWidth: "1180px", margin: "0 auto", padding: "0 24px 60px" }}>
-          <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+        {/* Cards grid */}
+        <div
+          className="blog-container"
+          style={{ maxWidth: "1180px", margin: "0 auto", padding: "0 24px 60px" }}
+        >
+          <div className="blog-grid">
             {ARTICLES.map((article) => (
               <ArticleCard key={article.id} article={article} />
             ))}

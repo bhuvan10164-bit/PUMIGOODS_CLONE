@@ -60,6 +60,8 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text-primary);
   font-family: var(--font-body);
+  overflow-x: hidden;   
+  box-sizing: border-box;
   /* The grain pseudo-element will be applied via layout/component */
 }
 
