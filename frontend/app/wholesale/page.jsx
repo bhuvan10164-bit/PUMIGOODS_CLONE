@@ -5,7 +5,7 @@ import SubscribeBanner from "../../components/SubscribeBanner";
 const RECENT_POSTS = [
   "My Eco-Friendly Coffee Routine (Or At Least, I'm Trying)",
   "The truth about those stupid little dots on your legs",
-  "Finally Throw Away My Old Hairbrush",
+  "Finally Throw Away My Old Hairbrush.",
   "We Tried to Make Our Kids' Bathroom Routine Less Disgusting (Plastic-wise)",
   "The Dust Factory: Why You Should Stop Scrubbing Your Skin With Plastic Trash",
 ];
@@ -27,19 +27,45 @@ const CATEGORIES = [
 
 const ARCHIVES = ["March 2026", "February 2026", "January 2026", "November 2025"];
 
+// SVG icons matching the screenshot exactly
+const LeafIcon = () => (
+  <svg viewBox="0 0 48 48" width="42" height="42" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M24 4C24 4 8 12 8 28C8 36.837 15.163 44 24 44C32.837 44 40 36.837 40 28C40 12 24 4 24 4Z" fill="#1a1a1a"/>
+    <path d="M24 44V20" stroke="#fff" strokeWidth="2" strokeLinecap="round"/>
+    <path d="M24 30C24 30 16 24 14 18" stroke="#fff" strokeWidth="1.5" strokeLinecap="round"/>
+  </svg>
+);
+
+const MegaphoneIcon = () => (
+  <svg viewBox="0 0 48 48" width="42" height="42" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M36 10L12 18V30L36 38V10Z" fill="#1a1a1a"/>
+    <rect x="8" y="18" width="4" height="12" rx="1" fill="#1a1a1a"/>
+    <path d="M12 28L16 36" stroke="#1a1a1a" strokeWidth="3" strokeLinecap="round"/>
+    <circle cx="38" cy="24" r="3" fill="#1a1a1a"/>
+  </svg>
+);
+
+const PercentIcon = () => (
+  <svg viewBox="0 0 48 48" width="42" height="42" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="12" y1="36" x2="36" y2="12" stroke="#1a1a1a" strokeWidth="3.5" strokeLinecap="round"/>
+    <circle cx="15" cy="15" r="5" fill="#1a1a1a"/>
+    <circle cx="33" cy="33" r="5" fill="#1a1a1a"/>
+  </svg>
+);
+
 const BENEFITS = [
   {
-    icon: "🌿",
+    Icon: LeafIcon,
     title: "Eco-Conscious Bulk Purchasing",
     desc: "Access our full selection of products at high volumes and wholesale pricing.",
   },
   {
-    icon: "📢",
+    Icon: MegaphoneIcon,
     title: "Marketing Support",
     desc: "We provide product photography and signage to help you communicate the zero waste story.",
   },
   {
-    icon: "％",
+    Icon: PercentIcon,
     title: "Special Offers",
     desc: "Seasonal discounts and early access to new product launches.",
   },
@@ -62,84 +88,62 @@ export default function WholesalePage() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Georgia&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body { font-family: 'Open Sans', Arial, sans-serif; }
-
-        .wh-page { background: #fff; min-height: 100vh; }
-
-        /* ── Top nav ── */
-        .wh-nav {
-          border-bottom: 1px solid #e8e8e8;
-          padding: 10px 0;
-          text-align: center;
-          font-size: 12px;
-          letter-spacing: 0.12em;
-          font-weight: 600;
-          color: #555;
+        .wh-page {
+          background: #fff;
+          min-height: 100vh;
+          font-family: 'Open Sans', Arial, sans-serif;
         }
-        .wh-nav a {
-          color: #555; text-decoration: none; margin: 0 14px;
-          text-transform: uppercase;
-        }
-        .wh-nav a:hover { color: #3a9e5f; }
 
         /* ── Page header ── */
         .wh-page-header {
           background: #f7f7f5;
           text-align: center;
-          padding: 36px 24px 24px;
+          padding: 36px 24px 22px;
           border-bottom: 1px solid #e8e8e8;
-          margin-bottom: 40px;
+          margin-bottom: 44px;
         }
         .wh-page-header h1 {
           font-family: Georgia, 'Times New Roman', serif;
-          font-size: 36px;
+          font-size: 34px;
           font-weight: 400;
           color: #1a1a1a;
           margin-bottom: 10px;
+          letter-spacing: 0.01em;
         }
-        .wh-breadcrumb {
-          font-size: 12px;
-          color: #999;
-        }
+        .wh-breadcrumb { font-size: 12px; color: #999; }
         .wh-breadcrumb a { color: #999; text-decoration: none; }
         .wh-breadcrumb a:hover { color: #3a9e5f; }
         .wh-breadcrumb strong { color: #555; }
 
         /* ── Main layout ── */
         .wh-layout {
-          max-width: 1100px;
+          max-width: 1080px;
           margin: 0 auto;
           padding: 0 24px 60px;
           display: flex;
-          gap: 48px;
+          gap: 44px;
           align-items: flex-start;
         }
 
-        /* ── Main content ── */
         .wh-main { flex: 1; min-width: 0; }
-
-        /* ── Sidebar ── */
-        .wh-sidebar {
-          width: 200px;
-          flex-shrink: 0;
-        }
+        .wh-sidebar { width: 196px; flex-shrink: 0; }
 
         /* ── Section headings ── */
         .wh-section-title {
           font-family: Georgia, 'Times New Roman', serif;
-          font-size: 20px;
+          font-size: 19px;
           font-weight: 400;
           color: #1a1a1a;
           text-align: center;
-          margin-bottom: 8px;
+          margin-bottom: 6px;
         }
         .wh-section-subtitle {
           font-family: Georgia, 'Times New Roman', serif;
-          font-size: 16px;
+          font-size: 15px;
           font-weight: 700;
           color: #1a1a1a;
           text-align: center;
@@ -147,19 +151,19 @@ export default function WholesalePage() {
         }
 
         /* ── Intro text ── */
-        .wh-intro p {
-          font-size: 13px;
+        .wh-intro-text {
+          font-size: 12.5px;
           color: #555;
           line-height: 1.75;
           margin-bottom: 14px;
         }
-        .wh-intro ul {
-          margin: 0 0 16px 20px;
-          font-size: 13px;
+        .wh-intro-list {
+          margin: 0 0 16px 18px;
+          font-size: 12.5px;
           color: #555;
-          line-height: 2;
+          line-height: 2.1;
         }
-        .wh-intro ul li { list-style: disc; }
+        .wh-intro-list li { list-style: disc; }
 
         /* ── Faire banner ── */
         .faire-banner {
@@ -170,29 +174,29 @@ export default function WholesalePage() {
           align-items: center;
           justify-content: space-between;
           gap: 20px;
-          margin: 32px 0 36px;
+          margin: 30px 0 38px;
         }
-        .faire-banner-text h3 {
+        .faire-banner-left { text-align: center; flex: 1; }
+        .faire-banner-left h3 {
           font-family: Georgia, 'Times New Roman', serif;
-          font-size: 16px;
+          font-size: 15px;
           font-weight: 400;
           color: #1a1a1a;
-          margin-bottom: 6px;
+          margin-bottom: 8px;
         }
-        .faire-banner-text p {
+        .faire-banner-left p {
           font-size: 12px;
           color: #777;
           line-height: 1.6;
-          max-width: 380px;
         }
         .faire-btn {
           background: #5aad78;
           color: #fff;
           border: none;
-          padding: 11px 20px;
-          font-size: 12px;
+          padding: 11px 18px;
+          font-size: 11.5px;
           font-weight: 700;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
           cursor: pointer;
           white-space: nowrap;
@@ -205,23 +209,29 @@ export default function WholesalePage() {
         .faire-btn:hover { background: #4a9a68; }
 
         /* ── Benefits ── */
+        .benefits-title {
+          font-family: Georgia, 'Times New Roman', serif;
+          font-size: 19px;
+          font-weight: 400;
+          color: #1a1a1a;
+          text-align: center;
+          margin-bottom: 28px;
+        }
         .benefits-grid {
           display: flex;
           gap: 0;
           text-align: center;
-          margin-bottom: 44px;
+          margin-bottom: 46px;
+          border-top: 1px solid #e8e8e8;
         }
         .benefit-item {
           flex: 1;
-          padding: 0 20px;
-          border-right: 1px solid #e8e8e8;
+          padding: 24px 20px 0;
         }
-        .benefit-item:last-child { border-right: none; }
-        .benefit-icon {
-          font-size: 28px;
-          margin-bottom: 12px;
-          display: block;
-          filter: grayscale(0.3);
+        .benefit-icon-wrap {
+          margin-bottom: 14px;
+          display: flex;
+          justify-content: center;
         }
         .benefit-item h4 {
           font-size: 13px;
@@ -238,28 +248,27 @@ export default function WholesalePage() {
         }
 
         /* ── Contact form ── */
-        .wh-form-section { margin-top: 8px; }
-        .wh-form-section h2 {
+        .wh-form-section { margin-top: 4px; }
+        .wh-form-title {
           font-family: Georgia, 'Times New Roman', serif;
-          font-size: 20px;
+          font-size: 19px;
           font-weight: 400;
           text-align: center;
           color: #1a1a1a;
           margin-bottom: 6px;
         }
-        .wh-form-section > p {
-          font-size: 12.5px;
+        .wh-form-subtitle {
+          font-size: 12px;
           color: #888;
           text-align: center;
           margin-bottom: 24px;
         }
-        .wh-form { display: flex; flex-direction: column; gap: 14px; }
+        .wh-form { display: flex; flex-direction: column; gap: 12px; }
         .wh-field label {
           display: block;
           font-size: 12px;
           color: #555;
           margin-bottom: 5px;
-          font-family: 'Open Sans', Arial, sans-serif;
         }
         .wh-field input,
         .wh-field textarea {
@@ -277,13 +286,13 @@ export default function WholesalePage() {
         }
         .wh-field input:focus,
         .wh-field textarea:focus { border-color: #5aad78; }
-        .wh-field textarea { height: 120px; }
+        .wh-field textarea { height: 130px; }
         .wh-submit-btn {
           background: #5aad78;
           color: #fff;
           border: none;
-          padding: 10px 22px;
-          font-size: 12px;
+          padding: 9px 20px;
+          font-size: 11px;
           font-weight: 700;
           letter-spacing: 0.12em;
           text-transform: uppercase;
@@ -292,63 +301,70 @@ export default function WholesalePage() {
           align-self: flex-start;
           transition: background 0.2s;
           border-radius: 0;
+          margin-top: 4px;
         }
         .wh-submit-btn:hover { background: #4a9a68; }
 
         /* ── Sidebar ── */
-        .sidebar-block { margin-bottom: 28px; }
+        .sidebar-block { margin-bottom: 26px; }
         .sidebar-block h3 {
-          font-size: 14px;
+          font-size: 13.5px;
           font-weight: 700;
           color: #1a1a1a;
-          margin-bottom: 12px;
+          margin-bottom: 10px;
           font-family: 'Open Sans', Arial, sans-serif;
         }
-        .sidebar-search {
-          display: flex;
-          gap: 0;
-        }
+        .sidebar-search { display: flex; gap: 0; }
         .sidebar-search input {
           flex: 1;
           border: 1px solid #d0d0d0;
           border-right: none;
-          padding: 8px 10px;
+          padding: 7px 9px;
           font-size: 12px;
           outline: none;
           font-family: 'Open Sans', Arial, sans-serif;
+          border-radius: 0;
         }
         .sidebar-search input:focus { border-color: #5aad78; }
         .sidebar-search button {
           background: #5aad78;
           color: #fff;
           border: none;
-          padding: 8px 12px;
-          font-size: 11px;
+          padding: 7px 11px;
+          font-size: 10px;
           font-weight: 700;
           letter-spacing: 0.1em;
           text-transform: uppercase;
           cursor: pointer;
           font-family: 'Open Sans', Arial, sans-serif;
           transition: background 0.2s;
+          border-radius: 0;
         }
         .sidebar-search button:hover { background: #4a9a68; }
         .sidebar-divider {
           border: none;
           border-top: 1px solid #e8e8e8;
-          margin: 4px 0 16px;
+          margin: 8px 0 12px;
         }
-        .sidebar-block ul { list-style: none; }
-        .sidebar-block ul li {
+        .sidebar-link {
+          display: block;
           font-size: 12.5px;
           color: #555;
-          padding: 3px 0;
+          text-decoration: none;
+          padding: 2px 0;
+          line-height: 1.7;
+        }
+        .sidebar-link:hover { color: #3a9e5f; }
+        .sidebar-plain {
+          font-size: 12.5px;
+          color: #555;
+          padding: 2px 0;
+          line-height: 1.7;
+          display: block;
           cursor: pointer;
         }
-        .sidebar-block ul li:hover { color: #3a9e5f; }
-        .no-comments {
-          font-size: 12.5px;
-          color: #888;
-        }
+        .sidebar-plain:hover { color: #3a9e5f; }
+        .no-comments { font-size: 12.5px; color: #888; }
 
         /* ── Mobile ── */
         @media (max-width: 768px) {
@@ -358,22 +374,21 @@ export default function WholesalePage() {
             gap: 32px;
           }
           .wh-sidebar { width: 100%; }
-          .faire-banner { flex-direction: column; align-items: flex-start; }
+          .faire-banner {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+          }
           .benefits-grid { flex-direction: column; gap: 24px; }
-          .benefit-item { border-right: none; border-bottom: 1px solid #e8e8e8; padding-bottom: 20px; }
+          .benefit-item {
+            border-bottom: 1px solid #e8e8e8;
+            padding-bottom: 20px;
+          }
           .benefit-item:last-child { border-bottom: none; }
-          .wh-nav { display: none; }
         }
       `}</style>
 
       <div className="wh-page">
-
-        {/* Nav */}
-        <nav className="wh-nav">
-          {["Home", "Shop", "Blog", "About Us", "Contact Us"].map((item) => (
-            <a key={item} href="#">{item}</a>
-          ))}
-        </nav>
 
         {/* Page header */}
         <div className="wh-page-header">
@@ -389,44 +404,39 @@ export default function WholesalePage() {
           {/* ── Left: Main content ── */}
           <div className="wh-main">
 
-            {/* Intro */}
-            <div className="wh-intro">
-              <p className="wh-section-title">Wholesale &amp; Partnerships</p>
-              <p className="wh-section-subtitle">Bring Sustainable Living to Your Shelves</p>
+            <p className="wh-section-title">Wholesale &amp; Partnerships</p>
+            <p className="wh-section-subtitle">Bring Sustainable Living to Your Shelves</p>
 
-              <p>
-                At <strong>Pumigoods</strong>, we believe that eco-friendly living should be accessible, beautiful, and functional. Our zero-waste products — from naturally antibacterial Neem wood combs to biodegradable bamboo toothbrushes — are the perfect addition to:
-              </p>
-              <ul>
-                <li>Retail Stores &amp; Boutiques</li>
-                <li>Zero Waste Refill Shops</li>
-                <li>Hotels &amp; Airbnbs</li>
-                <li>Spas &amp; Salons</li>
-                <li>Yoga Studios</li>
-                <li>Gift Shops</li>
-              </ul>
-              <p>
-                We offer a selection of in-store displays as well as educational signage to help explain the benefits of our natural materials to your customers.
-              </p>
-            </div>
+            <p className="wh-intro-text">
+              At <strong>Pumigoods</strong>, we believe that eco-friendly living should be accessible, beautiful, and functional. Our zero-waste products — from naturally antibacterial Neem wood combs to biodegradable bamboo toothbrushes — are the perfect addition to:
+            </p>
+            <ul className="wh-intro-list">
+              <li>Retail Stores &amp; Boutiques</li>
+              <li>Zero Waste Refill Shops</li>
+              <li>Hotels &amp; Airbnbs</li>
+              <li>Spas &amp; Salons</li>
+              <li>Yoga Studios</li>
+              <li>Gift Shops</li>
+            </ul>
+            <p className="wh-intro-text">
+              We offer a selection of in-store displays as well as educational signage to help explain the benefits of our natural materials to your customers.
+            </p>
 
             {/* Faire banner */}
             <div className="faire-banner">
-              <div className="faire-banner-text">
+              <div className="faire-banner-left">
                 <h3>For U.S. Retailers: Order via Faire</h3>
-                <p>
-                  We have partnered with Faire to offer you a seamless wholesale experience. Net 60 terms and free returns for new retailers.
-                </p>
+                <p>We have partnered with Faire to offer you a seamless wholesale experience. Net 60 terms and free returns for new retailers.</p>
               </div>
               <a href="#" className="faire-btn">Shop Pumigoods on Faire</a>
             </div>
 
             {/* Benefits */}
-            <p className="wh-section-title" style={{ marginBottom: "24px" }}>Benefits of a Wholesale Account</p>
+            <p className="benefits-title">Benefits of a Wholesale Account</p>
             <div className="benefits-grid">
               {BENEFITS.map((b) => (
                 <div className="benefit-item" key={b.title}>
-                  <span className="benefit-icon">{b.icon}</span>
+                  <div className="benefit-icon-wrap"><b.Icon /></div>
                   <h4>{b.title}</h4>
                   <p>{b.desc}</p>
                 </div>
@@ -435,36 +445,24 @@ export default function WholesalePage() {
 
             {/* Contact form */}
             <div className="wh-form-section">
-              <h2>International &amp; Custom Inquiries</h2>
-              <p>Not on Faire? Looking for international distribution? Fill out the form below:</p>
+              <h2 className="wh-form-title">International &amp; Custom Inquiries</h2>
+              <p className="wh-form-subtitle">Not on Faire? Looking for international distribution? Fill out the form below:</p>
               <form className="wh-form" onSubmit={handleSubmit}>
                 <div className="wh-field">
                   <label>Your name</label>
-                  <input
-                    type="text" name="name" value={form.name}
-                    onChange={handleChange} required
-                  />
+                  <input type="text" name="name" value={form.name} onChange={handleChange} required />
                 </div>
                 <div className="wh-field">
                   <label>Your email</label>
-                  <input
-                    type="email" name="email" value={form.email}
-                    onChange={handleChange} required
-                  />
+                  <input type="email" name="email" value={form.email} onChange={handleChange} required />
                 </div>
                 <div className="wh-field">
                   <label>Subject</label>
-                  <input
-                    type="text" name="subject" value={form.subject}
-                    onChange={handleChange}
-                  />
+                  <input type="text" name="subject" value={form.subject} onChange={handleChange} />
                 </div>
                 <div className="wh-field">
                   <label>Your message (optional)</label>
-                  <textarea
-                    name="message" value={form.message}
-                    onChange={handleChange}
-                  />
+                  <textarea name="message" value={form.message} onChange={handleChange} />
                 </div>
                 <button type="submit" className="wh-submit-btn">
                   {submitted ? "✓ Sent!" : "Submit"}
@@ -476,61 +474,42 @@ export default function WholesalePage() {
           {/* ── Right: Sidebar ── */}
           <aside className="wh-sidebar">
 
-            {/* Search */}
             <div className="sidebar-block">
               <h3>Search</h3>
               <div className="sidebar-search">
-                <input
-                  type="text"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder=""
-                />
+                <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} />
                 <button>Search</button>
               </div>
             </div>
 
-            {/* Recent Posts */}
             <div className="sidebar-block">
               <h3>Recent Posts</h3>
               <hr className="sidebar-divider" />
-              <ul>
-                {RECENT_POSTS.map((post) => (
-                  <li key={post}><a href="#" style={{ color: "#555", textDecoration: "none", fontSize: "12.5px" }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = "#3a9e5f"}
-                    onMouseLeave={(e) => e.currentTarget.style.color = "#555"}
-                  >{post}</a></li>
-                ))}
-              </ul>
+              {RECENT_POSTS.map((post) => (
+                <a key={post} href="#" className="sidebar-link">{post}</a>
+              ))}
             </div>
 
-            {/* Recent Comments */}
             <div className="sidebar-block">
               <h3>Recent Comments</h3>
               <hr className="sidebar-divider" />
               <p className="no-comments">No comments to show.</p>
             </div>
 
-            {/* Archives */}
             <div className="sidebar-block">
               <h3>Archives</h3>
               <hr className="sidebar-divider" />
-              <ul>
-                {ARCHIVES.map((a) => (
-                  <li key={a}>{a}</li>
-                ))}
-              </ul>
+              {ARCHIVES.map((a) => (
+                <span key={a} className="sidebar-plain">{a}</span>
+              ))}
             </div>
 
-            {/* Categories */}
             <div className="sidebar-block">
               <h3>Categories</h3>
               <hr className="sidebar-divider" />
-              <ul>
-                {CATEGORIES.map((c) => (
-                  <li key={c}>{c}</li>
-                ))}
-              </ul>
+              {CATEGORIES.map((c) => (
+                <span key={c} className="sidebar-plain">{c}</span>
+              ))}
             </div>
 
           </aside>
