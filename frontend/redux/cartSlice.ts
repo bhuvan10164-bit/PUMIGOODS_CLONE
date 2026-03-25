@@ -9,9 +9,15 @@ interface CartItem {
   quantity: number;
 }
 
-interface CartState { items: CartItem[] }
+interface CartState {
+  items: CartItem[];
+  isDrawerOpen: boolean;
+}
 
-const initialState: CartState = { items: [] };
+const initialState: CartState = {
+  items: [],
+  isDrawerOpen: false,
+};
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -25,6 +31,11 @@ const cartSlice = createSlice({
       } else {
         state.items.push({ ...itemData, quantity });
       }
+      // Auto-open drawer when adding
+      state.isDrawerOpen = true;
+    },
+    setDrawerOpen(state, action: PayloadAction<boolean>) {
+      state.isDrawerOpen = action.payload;
     },
     removeFromCart(state, action: PayloadAction<number>) {
       state.items = state.items.filter(i => i.id !== action.payload);
@@ -44,7 +55,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, increaseQty, decreaseQty, clearCart } =
+export const { addToCart, removeFromCart, increaseQty, decreaseQty, clearCart, setDrawerOpen } =
   cartSlice.actions;
 export default cartSlice.reducer;
 
@@ -54,3 +65,5 @@ export const selectCartCount  = (s: { cart: CartState }) =>
   s.cart.items.reduce((acc, i) => acc + i.quantity, 0);
 export const selectCartTotal  = (s: { cart: CartState }) =>
   s.cart.items.reduce((acc, i) => acc + i.price * i.quantity, 0);
+
+export const selectIsDrawerOpen = (s: { cart: CartState }) => s.cart.isDrawerOpen;

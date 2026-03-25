@@ -9,6 +9,8 @@ import {
   removeFromCart,
   increaseQty,
   decreaseQty,
+  selectIsDrawerOpen,
+  setDrawerOpen,
 } from "@/redux/cartSlice";
 import { selectWishlistItems } from "@/redux/wishlistSlice";
 
@@ -101,9 +103,9 @@ function CartDrawer({ open, onClose, items, onRemove, onQty }) {
                     <p className="text-xs text-gray-800 font-medium leading-snug">{item.name}</p>
                     <p className="text-xs text-[#2e8b4a] font-bold mt-1">${(item.price * item.qty).toFixed(2)}</p>
                     <div className="flex items-center gap-2 mt-2">
-                      <button onClick={() => item.qty > 1 ? onQty(item.id, item.qty - 1) : onRemove(item.id)} className="w-6 h-6 border border-gray-200 rounded text-sm flex items-center justify-center hover:border-[#2e8b4a] hover:text-[#2e8b4a] transition-colors">−</button>
+                      <button onClick={() => item.qty > 1 ? onQty(item.id, item.qty - 1, item.qty) : onRemove(item.id)} className="w-6 h-6 border border-gray-200 rounded text-sm flex items-center justify-center hover:border-[#2e8b4a] hover:text-[#2e8b4a] transition-colors">−</button>
                       <span className="text-xs w-5 text-center">{item.qty}</span>
-                      <button onClick={() => onQty(item.id, item.qty + 1)} className="w-6 h-6 border border-gray-200 rounded text-sm flex items-center justify-center hover:border-[#2e8b4a] hover:text-[#2e8b4a] transition-colors">+</button>
+                      <button onClick={() => onQty(item.id, item.qty + 1, item.qty)} className="w-6 h-6 border border-gray-200 rounded text-sm flex items-center justify-center hover:border-[#2e8b4a] hover:text-[#2e8b4a] transition-colors">+</button>
                     </div>
                   </div>
                   <button onClick={() => onRemove(item.id)} className="text-gray-300 hover:text-red-400 transition-colors mt-0.5">
@@ -507,6 +509,18 @@ export default function Navbar() {
   const cartCount     = useSelector(selectCartCount);
   const wishlistItems = useSelector(selectWishlistItems);
   const wishlistCount = wishlistItems.length;
+  const isDrawerOpenRedux = useSelector(selectIsDrawerOpen);
+
+  useEffect(() => {
+    if (isDrawerOpenRedux) {
+      setCartOpen(true);
+    }
+  }, [isDrawerOpenRedux]);
+
+  const closeCart = () => {
+    setCartOpen(false);
+    dispatch(setDrawerOpen(false));
+  };
 
   const removeItem = (id) => dispatch(removeFromCart(id));
 
@@ -682,11 +696,11 @@ export default function Navbar() {
       />
       <CartDrawer
         open={cartOpen}
-        onClose={() => setCartOpen(false)}
+        onClose={closeCart}
         items={cartItems.map(i => ({ ...i, qty: i.quantity }))}
         onRemove={removeItem}
         onQty={(id, qty, oldQty) => {
-          if (qty > (oldQty ?? qty - 1)) dispatch(increaseQty(id));
+          if (qty > oldQty) dispatch(increaseQty(id));
           else dispatch(decreaseQty(id));
         }}
       />
