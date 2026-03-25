@@ -12,13 +12,14 @@ import {
 } from "@/redux/cartSlice";
 import { selectWishlistItems } from "@/redux/wishlistSlice";
 
-const NAV_LINKS = ["HOME", "SHOP", "BLOG", "ABOUT US", "CONTACT US"];
+const NAV_LINKS = ["HOME", "SHOP", "WHOLESALE", "BLOG", "ABOUT US", "CONTACT US"];
 const HREF_MAP = {
   HOME: "/",
   SHOP: "/shop",
   BLOG: "/blog",
   "ABOUT US": "/about",
   "CONTACT US": "/contact",
+  WHOLESALE: "/wholesale",
 };
 
 /* ── Social Icons ── */
@@ -556,7 +557,7 @@ export default function Navbar() {
         </div>
 
         {/* ── Header ── */}
-        <header className="border-b border-gray-100 py-3 px-4 sm:px-6">
+        <header className="relative border-b border-gray-100 py-3 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
 
             {/* Mobile: Hamburger */}
@@ -588,9 +589,9 @@ export default function Navbar() {
             </div>
 
             {/* Logo — centered on mobile, positioned on desktop */}
-            <Link href="/" className="flex flex-col items-center leading-none absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
+            <Link href="/" className="flex flex-col items-center leading-none absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 md:static md:translate-x-0 md:translate-y-0">
               <img src={"https://pumigoods.com/wp-content/uploads/2025/10/Copy-of-Untitled-Brand-Template-2-e1759586360635-175x73.png"} alt="PumiGoods" 
-                style={{ width: "140px", height: "auto", marginBottom: "14px", display: "block" }} />
+                className="w-[100px] md:w-[140px] h-auto md:mb-3.5 block" />
             </Link>
 
             {/* Mobile: Cart icon only */}

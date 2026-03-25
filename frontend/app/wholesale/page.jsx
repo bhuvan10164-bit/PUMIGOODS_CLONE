@@ -90,7 +90,6 @@ export default function WholesalePage() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         .wh-page {
           background: #fff;
