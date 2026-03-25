@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart } from "@/redux/cartSlice";
+import { addToCart, selectCartItems } from "@/redux/cartSlice";
 import { toggleWishlist, selectWishlistItems } from "@/redux/wishlistSlice";
 
 const CartIcon = () => (
@@ -31,7 +31,9 @@ export function ProductCard({ product }) {
   const [addedToCart, setAddedToCart] = useState(false);
   const dispatch = useDispatch();
   const wishlistItems = useSelector(selectWishlistItems);
+  const cartItems = useSelector(selectCartItems);
   const wishlisted = wishlistItems.some(item => item.id === product.id);
+  const isInCart = cartItems.some(item => item.id === product.id);
 
   // Handle API vs Placeholder fields
   const beforeImg = product.images?.before_image || product.beforeImg || product.image;
@@ -140,7 +142,7 @@ export function ProductCard({ product }) {
               onClick={handleCart}
               className="flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full transition-all"
               style={{
-                background: addedToCart ? "#226e3a" : "#2e8b4a",
+                background: (addedToCart || isInCart) ? "#226e3a" : "#2e8b4a",
                 color: "white",
                 whiteSpace: "nowrap",
                 transform: addedToCart ? "scale(0.97)" : "scale(1)",
@@ -148,7 +150,7 @@ export function ProductCard({ product }) {
               }}
             >
               <CartIcon />
-              <span>{addedToCart ? "Added!" : "Add to Cart"}</span>
+              <span>{addedToCart ? "Added!" : (isInCart ? "Added" : "Add to Cart")}</span>
             </button>
 
             {/* Quick View */}
