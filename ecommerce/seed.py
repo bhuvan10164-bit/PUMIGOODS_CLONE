@@ -79,7 +79,7 @@ def seed_db():
             "currency": "USD",
             "images": {
                 "before_image": "https://pumigoods.com/wp-content/uploads/2025/07/itmh35uvnnmrghnj2zfa.webp",
-                "hover_image":  "https://pumigoods.com/wp-content/uploads/2025/07/kzh8xhe3f8cdt72p7pkk-700x700.webp",
+                "hover_image":  "",
                 "gallery": [
                     "https://pumigoods.com/wp-content/uploads/2025/07/itmh35uvnnmrghnj2zfa.webp",
                     "https://pumigoods.com/wp-content/uploads/2025/07/kzh8xhe3f8cdt72p7pkk-700x700.webp",

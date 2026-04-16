@@ -206,7 +206,7 @@ function LoginDrawer({ open, onClose }) {
               <path d="M5 62C5 46 55 46 55 62" stroke="#d1d5db" strokeWidth="3" fill="none" strokeLinecap="round"/>
             </svg>
             <p className="text-sm text-gray-700 font-medium">No account yet?</p>
-            <Link href="/register" onClick={onClose} className="text-xs font-bold tracking-widest uppercase text-gray-800 border-b-2 border-gray-800 pb-0.5 hover:text-[#2e8b4a] hover:border-[#2e8b4a] transition-colors">
+            <Link href="/my-account" onClick={onClose} className="text-xs font-bold tracking-widest uppercase text-gray-800 border-b-2 border-gray-800 pb-0.5 hover:text-[#2e8b4a] hover:border-[#2e8b4a] transition-colors">
               Create an Account
             </Link>
           </div>
@@ -482,7 +482,7 @@ function MobileBottomNav({ onCartOpen, wishlistCount, cartCount }) {
         <span className="text-[10px] font-semibold tracking-wide">Cart</span>
       </button>
 
-      <Link href="/account" className="flex-1 flex flex-col items-center gap-1 py-3 text-gray-500 hover:text-[#2e8b4a] transition-colors">
+      <Link href="/my-account" className="flex-1 flex flex-col items-center gap-1 py-3 text-gray-500 hover:text-[#2e8b4a] transition-colors">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
         </svg>
